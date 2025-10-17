@@ -1,71 +1,75 @@
-from flask import Blueprint, request, jsonify
-from pathlib import Path
-import json
-import re
-from werkzeug.security import generate_password_hash
-
-try:
-    from utils.helpers import json_response
-except Exception:  # pragma: no cover
-    from backend.utils.helpers import json_response
-
+# Authentication Routes
+from flask import Blueprint, request
+from backend.utils.helpers import json_response
 
 auth_bp = Blueprint('auth', __name__)
-
-DATA_DIR = Path(__file__).resolve().parent.parent / 'data'
-USERS_FILE = DATA_DIR / 'users.json'
-
-
-def _load_users():
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    if not USERS_FILE.exists():
-        USERS_FILE.write_text('[]', encoding='utf-8')
-    try:
-        return json.loads(USERS_FILE.read_text(encoding='utf-8'))
-    except Exception:
-        return []
-
-
-def _save_users(users):
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    USERS_FILE.write_text(json.dumps(users, ensure_ascii=False, indent=2), encoding='utf-8')
-
-
-def _valid_email(email: str) -> bool:
-    return re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email or "") is not None
 
 
 @auth_bp.post('/register')
 def register():
+    """User registration endpoint"""
     try:
-        payload = request.get_json(force=True, silent=False) or {}
-    except Exception:
-        return json_response(False, error='Invalid JSON body', status=400)
+        data = request.get_json()
+        
+        # TODO: Validate input
+        first_name = data.get('firstName')
+        last_name = data.get('lastName')
+        email = data.get('email')
+        password = data.get('password')
+        
+        if not all([first_name, last_name, email, password]):
+            return json_response(False, error='Vui lòng điền đầy đủ thông tin', status=400)
+        
+        # TODO: Check if email exists
+        # TODO: Hash password
+        # TODO: Save to database
+        # TODO: Generate token
+        
+        # Mock response
+        return json_response(True, data={
+            'message': 'Đăng ký thành công',
+            'user': {
+                'firstName': first_name,
+                'lastName': last_name,
+                'email': email
+            }
+        })
+        
+    except Exception as e:
+        return json_response(False, error=str(e), status=500)
 
-    name = (payload.get('name') or '').strip()
-    email = (payload.get('email') or '').strip().lower()
-    password = payload.get('password') or ''
 
-    if not name:
-        return json_response(False, error='Tên không được để trống', status=400)
-    if not _valid_email(email):
-        return json_response(False, error='Email không hợp lệ', status=400)
-    if len(password) < 6:
-        return json_response(False, error='Mật khẩu phải từ 6 ký tự', status=400)
+@auth_bp.post('/login')
+def login():
+    """User login endpoint"""
+    try:
+        data = request.get_json()
+        
+        email = data.get('email')
+        password = data.get('password')
+        
+        if not all([email, password]):
+            return json_response(False, error='Email và mật khẩu không được để trống', status=400)
+        
+        # TODO: Validate credentials
+        # TODO: Generate token
+        
+        # Mock response
+        return json_response(True, data={
+            'message': 'Đăng nhập thành công',
+            'token': 'mock_jwt_token_here',
+            'user': {
+                'email': email,
+                'name': 'User Name'
+            }
+        })
+        
+    except Exception as e:
+        return json_response(False, error=str(e), status=500)
 
-    users = _load_users()
-    if any(u.get('email') == email for u in users):
-        return json_response(False, error='Email đã được đăng ký', status=409)
 
-    user = {
-        'name': name,
-        'email': email,
-        'password_hash': generate_password_hash(password),
-    }
-    users.append(user)
-    _save_users(users)
-
-    # Do not return password hash
-    public_user = {k: v for k, v in user.items() if k != 'password_hash'}
-    return json_response(True, data={'user': public_user}, status=201)
-
+@auth_bp.post('/logout')
+def logout():
+    """User logout endpoint"""
+    # TODO: Invalidate token
+    return json_response(True, data={'message': 'Đăng xuất thành công'})

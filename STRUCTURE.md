@@ -41,7 +41,15 @@ myeditor/
 │   │   ├── 📂 images/                # Hình ảnh
 │   │   └── 📂 fonts/                 # Fonts (nếu dùng custom fonts)
 │   │
-│   └── 📂 pages/                      # Các trang khác (nếu cần)
+│   └── 📂 pages/                      # Các trang khác
+│       ├── 📂 register/              # Trang đăng ký
+│       │   ├── index.html           # HTML
+│       │   ├── style.css            # CSS riêng
+│       │   └── script.js            # JS riêng
+│       └── 📂 login/                 # Trang đăng nhập
+│           ├── index.html           # HTML
+│           ├── style.css            # CSS riêng
+│           └── script.js            # JS riêng
 │
 ├── 📂 tests/                          # Tests
 │   ├── 📄 test_backend.py            # Test backend (unittest/pytest)
@@ -93,6 +101,25 @@ myeditor/
 - Import CSS và JS files
 - Các sections: hero, generate, analyze, chat
 - Navigation và footer
+
+#### `pages/` - Cấu trúc theo folder
+Mỗi page có folder riêng với đầy đủ `index.html`, `style.css`, `script.js`
+
+**Ví dụ: `pages/register/`**
+- `index.html` - Structure trang đăng ký
+- `style.css` - Styles riêng cho trang này
+- `script.js` - Logic và validation riêng
+
+**Ví dụ: `pages/login/`**
+- `index.html` - Structure trang đăng nhập
+- `style.css` - Styles riêng cho trang này
+- `script.js` - Logic authentication riêng
+
+**Ưu điểm cấu trúc này:**
+- Code tách biệt, dễ maintain
+- Không conflict giữa các trang
+- Dễ scale khi thêm pages mới
+- Performance tốt hơn (chỉ load CSS/JS cần thiết)
 
 #### `css/styles.css`
 - Reset CSS
@@ -158,8 +185,9 @@ pip install -r requirements.txt
 1. backend/utils/helpers.py          # Utilities trước
 2. backend/services/text_service.py  # Text processing
 3. backend/services/ai_service.py    # AI logic
-4. backend/routes/ai_routes.py       # API routes
-5. backend/app.py                    # Main app
+4. backend/routes/auth_routes.py     # Authentication routes (đã có mẫu)
+5. backend/routes/ai_routes.py       # API routes
+6. backend/app.py                    # Main app (đã có mẫu)
 ```
 
 ### 2. Frontend sau
@@ -173,6 +201,20 @@ pip install -r requirements.txt
 6. frontend/js/ui.js                 # UI handlers
 7. frontend/js/main.js               # Main logic
 8. frontend/css/responsive.css       # Responsive cuối
+```
+
+### 3. Tạo thêm pages (theo cấu trúc mới)
+```bash
+# Mỗi page một folder:
+frontend/pages/
+├── your-page-name/
+│   ├── index.html      # HTML riêng
+│   ├── style.css       # CSS riêng
+│   └── script.js       # JS riêng
+
+# Đã có sẵn mẫu:
+- pages/register/       # Trang đăng ký (thiết kế sang trọng)
+- pages/login/          # Trang đăng nhập (thiết kế hiện đại)
 ```
 
 ## 💡 Tips
