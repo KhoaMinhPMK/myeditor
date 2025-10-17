@@ -1,0 +1,42 @@
+/* Main Styles */
+
+/* TODO: Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* TODO: Variables (colors, fonts, spacing) */
+:root {
+    --primary-color: #your-color;
+    --secondary-color: #your-color;
+    /* Thêm các biến khác */
+}
+
+/* TODO: Base styles */
+body {
+    font-family: Arial, sans-serif;
+    /* Thêm styling */
+}
+
+/* TODO: Navigation styles */
+nav {
+    /* Style cho navbar */
+}
+
+/* TODO: Main content styles */
+main {
+    /* Style cho main content */
+}
+
+/* TODO: Section styles */
+section {
+    /* Style cho các sections */
+}
+
+/* TODO: Footer styles */
+footer {
+    /* Style cho footer */
+}
+
