@@ -1,33 +1,29 @@
-# Backend Flask Application
-# TODO: Import các thư viện cần thiết (Flask, CORS, etc.)
+from flask import Flask, jsonify
+from flask_cors import CORS
 
-# TODO: Khởi tạo Flask app
+try:
+    # When running from backend/ directory
+    from routes.auth_routes import auth_bp
+except Exception:  # pragma: no cover
+    # Fallback if executed differently
+    from backend.routes.auth_routes import auth_bp
 
-# TODO: Cấu hình CORS
 
-# TODO: Load AI models (lazy loading)
+def create_app():
+    app = Flask(__name__)
+    CORS(app)
 
-# TODO: Define routes/endpoints
+    @app.get('/api/health')
+    def health():
+        return jsonify({"status": "ok"}), 200
 
-# Route: Trang chủ
-# @app.route('/')
+    # Register blueprints
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
 
-# Route: Health check
-# @app.route('/api/health')
+    return app
 
-# Route: AI text generation
-# @app.route('/api/ai/generate', methods=['POST'])
 
-# Route: AI sentiment analysis
-# @app.route('/api/ai/analyze', methods=['POST'])
-
-# Route: AI text summarization
-# @app.route('/api/ai/summarize', methods=['POST'])
-
-# Route: Chat
-# @app.route('/api/chat', methods=['POST'])
-
-# TODO: Main execution
-# if __name__ == '__main__':
-#     app.run()
+if __name__ == '__main__':
+    app = create_app()
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
