@@ -1,173 +1,248 @@
-# AI Web Application - Template
+# 🎨 Pixie Image Editor - Photoshop Style
 
-Cấu trúc dự án web với frontend (HTML, CSS, JavaScript) và backend (Python) xử lý AI.
+A modern, feature-rich web-based image editor with a professional Photoshop-inspired dark theme interface. Built with AngularJS, Fabric.js, and powered by advanced image manipulation capabilities.
 
-## 📁 Cấu trúc thư mục
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Node](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)
+
+## ✨ Features
+
+### 🖼️ Core Image Editing
+- **Crop & Resize** - Flexible cropping with aspect ratio control and custom dimensions
+- **Rotate & Transform** - 90° quick rotate or custom angle rotation
+- **Rounded Corners** - Add rounded corners with adjustable radius
+- **Canvas Background** - Change canvas background color
+
+### 🎨 Advanced Tools
+- **Text Editor** - Add and customize text with multiple fonts, sizes, and styles
+- **Drawing Tools** - Multiple brush types (pencil, spray, circle, diamond, etc.)
+- **Shape Library** - Rectangle, circle, ellipse, triangle, and polygon shapes
+- **Filters** - 15+ professional filters (blur, sharpen, brightness, contrast, sepia, grayscale, etc.)
+- **Stickers** - Rich collection of stickers (animals, beach, clouds, doodles, landmarks, etc.)
+
+### 🎯 Professional Features
+- **Layers Panel** - Manage, reorder, hide/show, and lock layers
+- **History Panel** - Undo/redo with complete edit history
+- **Zoom Controls** - Precise zoom controls with fit-to-screen option
+- **Multiple Export Formats** - Save as JPEG, PNG, or JSON (editor state)
+
+### 🌙 Photoshop-Inspired Interface
+- **Dark Theme** - Professional dark interface for reduced eye strain
+- **Blue Accents** - Photoshop-style blue highlights and active states
+- **Fixed Top Toolbar** - Quick access to main functions
+- **Icon-Only Navigation** - Clean 60px sidebar with icon-only navigation
+- **Smooth Transitions** - Polished animations and interactions
+- **Shadow Depth** - Professional depth and elevation effects
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js (>= 14.0.0)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/pixie-image-editor.git
+cd pixie-image-editor
+
+# Install dependencies
+cd frontend
+npm install
+```
+
+### Development
+
+```bash
+# Compile LESS to CSS
+npm run build
+
+# Or use gulp watch for auto-compilation
+npx gulp watch
+
+# Or compile manually
+npx lessc assets/less/main.less assets/css/main.css
+```
+
+### Run the Application
+
+```bash
+# Option 1: Open directly in browser
+# Simply open frontend/index.html in your browser
+
+# Option 2: Use a local server (recommended)
+npx http-server -p 8080
+# Then visit http://localhost:8080
+```
+
+## 📁 Project Structure
 
 ```
 myeditor/
-│
-├── backend/                    # Backend Python với Flask
-│   ├── app.py                 # File chính chạy Flask server
-│   ├── models/                # Thư mục chứa các AI models
-│   │   └── __init__.py
-│   ├── routes/                # Các route/endpoint API
-│   │   ├── __init__.py
-│   │   ├── ai_routes.py      # Routes xử lý AI
-│   │   └── chat_routes.py    # Routes chat
-│   ├── services/              # Logic xử lý business
-│   │   ├── __init__.py
-│   │   ├── ai_service.py     # Service xử lý AI
-│   │   └── text_service.py   # Service xử lý text
-│   └── utils/                 # Các hàm tiện ích
-│       ├── __init__.py
-│       └── helpers.py
-│
-├── frontend/                   # Frontend HTML/CSS/JS
-│   ├── index.html             # Trang chính
-│   ├── css/                   # Thư mục CSS
-│   │   ├── styles.css        # CSS chính
-│   │   ├── components.css    # CSS components
-│   │   └── responsive.css    # CSS responsive
-│   ├── js/                    # Thư mục JavaScript
-│   │   ├── main.js           # JS chính
-│   │   ├── api.js            # Xử lý API calls
-│   │   ├── ui.js             # Xử lý UI/UX
-│   │   └── utils.js          # Utilities JS
-│   ├── assets/                # Tài nguyên tĩnh
-│   │   ├── images/           # Hình ảnh
-│   │   └── fonts/            # Fonts
-│   └── pages/                 # Các trang khác (nếu có)
-│
-├── tests/                      # Unit tests
-│   ├── test_backend.py
-│   └── test_frontend.js
-│
-├── requirements.txt            # Python dependencies
-├── .gitignore                 # Git ignore
-└── README.md                  # File này
+├── frontend/
+│   ├── assets/
+│   │   ├── css/              # Compiled CSS files
+│   │   │   ├── main.css      # Main stylesheet (Photoshop theme)
+│   │   │   └── integrate.css
+│   │   ├── js/               # JavaScript files
+│   │   │   ├── editor/       # Editor modules
+│   │   │   │   ├── App.js
+│   │   │   │   ├── Canvas.js
+│   │   │   │   ├── basics/   # Crop, Rotate, Resize, etc.
+│   │   │   │   ├── text/     # Text tools
+│   │   │   │   ├── drawing/  # Drawing tools
+│   │   │   │   ├── filters/  # Image filters
+│   │   │   │   ├── shapes/   # Shapes and stickers
+│   │   │   │   └── objects/  # Layer management
+│   │   │   └── vendor/       # Third-party libraries
+│   │   ├── less/             # LESS source files
+│   │   │   ├── main.less     # Main styles (Photoshop theme)
+│   │   │   └── vendor/       # Bootstrap, Material Design
+│   │   ├── images/           # Image assets
+│   │   │   ├── brushes/
+│   │   │   ├── filters/
+│   │   │   ├── shapes/
+│   │   │   ├── stickers/
+│   │   │   └── textures/
+│   │   └── fonts/            # Material Design Icons
+│   ├── index.html            # Main application
+│   ├── gulpfile.js           # Gulp build tasks
+│   ├── package.json          # Dependencies
+│   └── config.json           # App configuration
+└── README.md                 # This file
 ```
 
-## 🚀 Cài đặt
+## 🎨 Customization
 
-### Backend (Python)
+### Changing Theme Colors
 
-1. Tạo môi trường ảo:
+Edit `frontend/assets/less/main.less`:
+
+```less
+// Photoshop-inspired Dark Theme
+@primary-color: #1E1E1E;          // Almost black (panel headers)
+@secondary-bg: #2C2C2C;           // Dark gray (panel body)
+@tertiary-bg: #383838;            // Medium dark (tabs, top bar)
+@accent-color: #31C5F0;           // Photoshop blue (active states)
+@hover-color: #474747;            // Hover states
+```
+
+Then recompile:
+
 ```bash
-python -m venv venv
+cd frontend
+npx lessc assets/less/main.less assets/css/main.css
 ```
 
-2. Kích hoạt môi trường ảo:
-- Windows: `venv\Scripts\activate`
-- Linux/Mac: `source venv/bin/activate`
+### Adding Custom Filters
 
-3. Cài đặt dependencies:
-```bash
-pip install -r requirements.txt
+Add your filter in `frontend/assets/js/editor/filters/Filters.js`:
+
+```javascript
+this.all.push({
+    name: 'YourFilter',
+    displayName: 'Your Filter',
+    apply: function(canvas) {
+        // Your filter logic here
+    }
+});
 ```
 
-4. Chạy server:
-```bash
-cd backend
-python app.py
-```
+### Adding Custom Stickers
 
-Server sẽ chạy tại `http://localhost:5000`
+1. Place images in `frontend/assets/images/stickers/your-category/`
+2. Update `frontend/assets/js/editor/shapes/StickersCategories.js`
 
-### Frontend
-
-Mở file `frontend/index.html` trực tiếp trong trình duyệt, hoặc sử dụng Live Server.
-
-## 🔧 Công nghệ sử dụng
-
-### Backend
-- **Flask**: Web framework
-- **Flask-CORS**: Xử lý CORS
-- **Transformers**: Thư viện AI của HuggingFace
-- **PyTorch**: Deep learning framework
-- **NumPy**: Xử lý số học
+## 🛠️ Technologies Used
 
 ### Frontend
-- **HTML5**: Structure
-- **CSS3**: Styling (với Flexbox/Grid)
-- **Vanilla JavaScript**: Logic và tương tác
-- **Fetch API**: Gọi API backend
+- **AngularJS 1.x** - Application framework
+- **Fabric.js** - Canvas manipulation
+- **Angular Material** - UI components
+- **jQuery** - DOM manipulation
+- **Spectrum.js** - Color picker
+- **LESS** - CSS preprocessing
 
-## 📝 API Endpoints
+### Build Tools
+- **Gulp** - Task automation
+- **LESS Compiler** - CSS compilation
+- **Autoprefixer** - CSS vendor prefixes
+- **Uglify** - JavaScript minification
 
-### Health Check
-- `GET /api/health` - Kiểm tra trạng thái server
+## 📋 Browser Support
 
-### AI Processing
-- `POST /api/ai/generate` - Tạo văn bản từ AI
-- `POST /api/ai/analyze` - Phân tích cảm xúc văn bản
-- `POST /api/ai/summarize` - Tóm tắt văn bản
+- ✅ Chrome (recommended)
+- ✅ Firefox
+- ✅ Safari
+- ✅ Edge
+- ⚠️ IE11 (limited support)
 
-### Chat
-- `POST /api/chat` - Gửi tin nhắn chat
+## 🤝 Contributing
 
-## 🎨 Tính năng gợi ý
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-1. **Text Generation**: Tạo văn bản từ prompt
-2. **Sentiment Analysis**: Phân tích cảm xúc
-3. **Text Summarization**: Tóm tắt văn bản
-4. **AI Chat**: Chatbot thông minh
-5. **Image Processing**: Xử lý ảnh (mở rộng)
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📚 Hướng dẫn phát triển
+## 📝 Known Issues
 
-### Backend
+- Gulp compatibility with Node.js v22+ (use direct LESS compilation)
+- Some filters may be slow on large images
+- Mobile responsiveness needs improvement
 
-1. **Thêm route mới**: Tạo file trong `backend/routes/`
-2. **Thêm service**: Tạo file trong `backend/services/`
-3. **Load AI model**: Sử dụng `transformers` library trong `services/ai_service.py`
+## 🔮 Future Enhancements
 
-### Frontend
-
-1. **Thêm trang mới**: Tạo HTML trong `frontend/pages/`
-2. **Thêm style**: Cập nhật CSS trong `frontend/css/`
-3. **Thêm logic**: Cập nhật JS trong `frontend/js/`
-
-## 🔐 Bảo mật
-
-- Thêm authentication nếu cần
-- Validate input từ user
-- Sử dụng HTTPS trong production
-- Không expose API keys trong code
-
-## 📦 Deploy
-
-### Backend
-- Heroku
-- Railway
-- PythonAnywhere
-- AWS/GCP/Azure
-
-### Frontend
-- Netlify
-- Vercel
-- GitHub Pages
-- Firebase Hosting
-
-## 🤝 Đóng góp
-
-1. Fork dự án
-2. Tạo branch mới (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Tạo Pull Request
+- [ ] Layer blending modes
+- [ ] Advanced selection tools (magic wand, lasso)
+- [ ] Gradient tool
+- [ ] Clone stamp tool
+- [ ] Image adjustments (curves, levels)
+- [ ] Batch processing
+- [ ] Cloud storage integration
+- [ ] Mobile responsive design
+- [ ] PWA support
+- [ ] Collaborative editing
 
 ## 📄 License
 
-MIT License - Tự do sử dụng và chỉnh sửa
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Liên hệ
+## 👤 Author
 
-- Email: your-email@example.com
-- GitHub: @yourusername
+**Le Thi Nha My**
+- Email: my.le2412138@hcmut.edu.vn
+- University: Ho Chi Minh City University of Technology (HCMUT)
+
+## 🙏 Acknowledgments
+
+- Inspired by Adobe Photoshop's interface design
+- Built upon the Pixie Image Editor base
+- Icons by Material Design Icons
+- Fabric.js for canvas manipulation
+- AngularJS community for excellent documentation
+
+## 📸 Screenshots
+
+### Main Interface
+![Main Interface](docs/screenshots/main-interface.png)
+
+### Text Editor
+![Text Editor](docs/screenshots/text-editor.png)
+
+### Filters
+![Filters](docs/screenshots/filters.png)
+
+### Layers Panel
+![Layers](docs/screenshots/layers.png)
 
 ---
 
-**Happy Coding! 🎉**
+**Made with ❤️ by Le Thi Nha My**
 
-"# myeditor" 
+*For educational purposes at HCMUT*

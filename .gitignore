@@ -1,25 +1,44 @@
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-.venv
-pip-log.txt
-pip-delete-this-directory.txt
-.env
-*.log
-.DS_Store
+# Dependencies
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production
 dist/
 build/
-*.egg-info/
-.pytest_cache/
-.coverage
-htmlcov/
-models/
-*.pt
-*.pth
 
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Build artifacts
+*.css.map
+*.js.map
+
+# Optional: Uncomment if you don't want to track compiled CSS
+# frontend/assets/css/main.css
